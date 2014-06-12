@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Athena",
+  "description": "A dictionary lookup extension for both Myanmar and English languages",
+  "version": "0.1",
+  "permissions": [
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/athena.js"
+      ]
+    }
+  ]
+}
