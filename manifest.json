@@ -4,6 +4,7 @@
   "description": "A dictionary lookup extension for both Myanmar and English languages",
   "version": "0.1",
   "permissions": [
+    "http://www.ornagai.com/"
   ],
   "content_scripts": [
     {
@@ -15,5 +16,6 @@
         "js/athena.js"
       ]
     }
-  ]
+  ],
+  "author": "Kaung Htet Zaw"
 }
