@@ -1,6 +1,7 @@
 (function () {
 
   var dictionary = {
+
     _makeRequest: function(url, callback) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url);
@@ -22,7 +23,7 @@
           words = words.filter(function(value) {
             return value.word.toLowerCase() === word.toLowerCase();
           });
-          console.log(words);
+          return words[0].def;
         }
       });
     },
