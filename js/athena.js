@@ -1,9 +1,22 @@
 (function () {
 
-
   var dictionary = {
+    _makeRequest: function(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.addEventListener('load', function(e) {
+        var result = xhr.responseText;
+        callback(result);
+      });
+      xhr.send();
+    },
+
     _inOrnagai: function(word) {
       console.log("looking up " + word + " in ornagai");
+      var ornagai = "http://www.ornagai.com/index.php/api/word/q/" + word;
+      this._makeRequest(ornagai, function(e) {
+        console.log(e);
+      });
     },
 
     _inOxford: function(word) {
