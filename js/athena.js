@@ -1,21 +1,22 @@
 (function () {
 
+
   var dictionary = {
     _inOrnagai: function(word) {
-      console.log("looking up in ornagai");
+      console.log("looking up " + word + " in ornagai");
     },
 
     _inOxford: function(word) {
-      console.log("looking up in oxford");
+      console.log("looking up " + word + " in oxford");
     },
 
-    lookUp: function() {
-      _inOrnagai("intelligence");
-      _inOxford("intelligence");
+    lookUp: function(word) {
+      this._inOrnagai(word);
+      this._inOxford(word);
     }
   };
 
-  document.addEventListener('dbclick', function(e) {
+  document.addEventListener('dblclick', function(e) {
     var focused = document.activeElement;
     var selectedText;
     if(focused) {
@@ -26,8 +27,10 @@
       }
     }
     if(selectedText === undefined) {
-      selectedText = window.getSelection.toString();
+      selectedText = window.getSelection().toString();
     }
+
+    dictionary.lookUp(selectedText);
   });
 
 })();
