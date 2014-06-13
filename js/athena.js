@@ -14,8 +14,16 @@
     _inOrnagai: function(word) {
       console.log("looking up " + word + " in ornagai");
       var ornagai = "http://www.ornagai.com/index.php/api/word/q/" + word;
-      this._makeRequest(ornagai, function(e) {
-        console.log(e);
+      this._makeRequest(ornagai, function(response) {
+        var words = JSON.parse(response);
+        if(words === undefined) {
+          return "No definition";
+        } else {
+          words = words.filter(function(value) {
+            return value.word.toLowerCase() === word.toLowerCase();
+          });
+          console.log(words);
+        }
       });
     },
 
