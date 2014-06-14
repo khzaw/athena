@@ -1,11 +1,13 @@
 .tooltip {
   position: relative;
+  width: 250px;
   display: inline-block;
   z-index: 99999;
   background: #383838;
   color: white;
   padding: 15px;
   border-radius: 4px;
+  word-wrap: break-word;
 }
 
 .tooltip:after {
@@ -32,6 +34,6 @@
 }
 .mmdef span {
   display: block;
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
