@@ -2,39 +2,46 @@
 
   var dictionary = {
 
-    _makeRequest: function(url, callback) {
+    _makeRequest: function(url, success, error) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url);
       xhr.addEventListener('load', function(e) {
-        var result = xhr.responseText;
-        callback(result);
+        if(xhr.status == 200) {
+          success(xhr.status, xhr.responseText);
+        } else {
+          if(error) {
+            error(xhr.status, xhr);
+          }
+        }
       });
       xhr.send();
     },
 
     _inOrnagai: function(word) {
-      console.log("looking up " + word + " in ornagai");
       var ornagai = "http://www.ornagai.com/index.php/api/word/q/" + word;
-      this._makeRequest(ornagai, function(response) {
+      var result = [];
+      this._makeRequest(ornagai, function(status, response) {
         var words = JSON.parse(response);
-        if(words === undefined) {
-          return "No definition";
-        } else {
-          words = words.filter(function(value) {
-            return value.word.toLowerCase() === word.toLowerCase();
-          });
-          return words[0].def;
-        }
+        result = words.filter(function(value) {
+          return value.word.toLowerCase() === word.toLowerCase();
+        });
       });
+      console.log("Result", result);
+      return result;
     },
 
     _inOxford: function(word) {
       console.log("looking up " + word + " in oxford");
     },
 
+    _render: function(myanmar, eng) {
+      console.log("rendering");
+    },
+
     lookUp: function(word) {
-      this._inOrnagai(word);
-      this._inOxford(word);
+      var myanmar = this._inOrnagai(word);
+      var eng = this._inOxford(word);
+      this._render(myanmar, eng);
     }
   };
 
