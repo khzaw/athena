@@ -29,5 +29,9 @@
 
 .mmdef {
   font-size: 13px;
+}
+.mmdef span {
+  display: block;
   margin: 5px 0;
 }
+
