@@ -8,7 +8,7 @@ Create issues for
 
 ## Code contributions
 Please adhere to this [style guide](https://github.com/rwaldron/idiomatic.js) and most importantly,
-- indentations are soft indents (spaces) with an indent size of two characters.
+- Indentations are soft indents (spaces) with an indent size of two characters.
 - No extra end of line and blank line whitespace
 
 ## Commit messages
