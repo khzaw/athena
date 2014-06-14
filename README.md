@@ -21,4 +21,4 @@ The followings are some of the features that I have in mind. Including, but not 
 
 Contribution
 ============
-Contributions are welcome. Please refer to the ![Contribution guidelines](CONTRIBUTION.md).
+Contributions are welcome. Please refer to the [Contribution guidelines](CONTRIBUTION.md).
