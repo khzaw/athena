@@ -1,4 +1,4 @@
-.tooltip {
+#athena-tooltip {
   position: relative;
   width: 250px;
   display: inline-block;
@@ -10,7 +10,7 @@
   word-wrap: break-word;
 }
 
-.tooltip:after {
+#athena-tooltip:after {
   content: "";
   position: absolute;
   width: 0;
@@ -23,16 +23,16 @@
   margin-left: -25px;
 }
 
-.word {
+#athena-tooltip .word {
   font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
   font-size: 14px;
   margin-bottom: 25px;
 }
 
-.mmdef {
+#athena-tooltip .mmdef {
   font-size: 13px;
 }
-.mmdef span {
+#athena-tooltip .mmdef span {
   display: block;
   margin: 10px 0;
 }
