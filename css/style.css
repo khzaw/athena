@@ -1,0 +1,33 @@
+.tooltip {
+  position: relative;
+  display: inline-block;
+  z-index: 99999;
+  background: #383838;
+  color: white;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.tooltip:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: solid transparent;
+  pointer-events: none;
+  border-top-color: #383838;
+  border-width: 25px;
+  left: 50%;
+  margin-left: -25px;
+}
+
+.word {
+  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.mmdef {
+  font-size: 13px;
+  margin: 5px 0;
+}
