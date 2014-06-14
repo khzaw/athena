@@ -1,7 +1,8 @@
 var athena = (function() {
   var ORNAGAI = "http://www.ornagai.com/index.php/api/word/q/";
+  var my;
 
-  var makeRequest = function(word, success, error) {
+  var makeRequest = function(word, success, error, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', ORNAGAI + word);
     xhr.addEventListener('load', function(e) {
@@ -12,21 +13,20 @@ var athena = (function() {
           error(xhr.status, xhr);
         }
       }
+      callback();
     });
     xhr.send();
   };
 
-  var inOrnagai = function(word) {
-    var result = [];
+  var inOrnagai = function(word, callback) {
+    var result;
     makeRequest(word, function(status, response) {
       var words = JSON.parse(response);
-      result = words.filter(function(value) {
-        return value.word.toLowerCase() === word.toLowerCase();
+      var result = words.filter(function(value) {
+        return value.word.toLowerCase() == word.toLowerCase();
       });
-      console.log("Inside: ", result);
+      callback(result);
     });
-    console.log("Outside: ", result);
-    return result;
   };
 
   var inOxford = function(word) {
@@ -35,10 +35,9 @@ var athena = (function() {
 
   return {
     lookUp: function(word) {
-      var myanmar = inOrnagai(word);
-      console.log("Myanmar", myanmar);
-
-      // inOxford(word);
+      var myanmar = inOrnagai(word, function(result) {
+          console.log("Myanmar", result);
+      });
     }
   };
 
