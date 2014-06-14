@@ -34,11 +34,17 @@ var athena = (function() {
     console.log("looking up " + word + " in Oxford");
   };
 
-  var renderTooltip = function(word, result, selected) {
-    var $tooltip = document.createElement('div');
+  var renderTooltip = function(word, result, selected, e) {
+    var $tooltip = document.getElementById('athena-tooltip') || 
+                    document.createElement('div');
+    $tooltip.innerHTML = '';
+
+    $tooltip.id = 'athena-tooltip';
     var $word = document.createElement('div');
+    $word.classList.add('word');
     $word.innerText = word;
-    var $mmdef = document.createElement('mmdef');
+    var $mmdef = document.createElement('div');
+    $mmdef.classList.add('mmdef');
     if(result.length > 0) {
       for(var r in result) {
         var $r = document.createElement('span');
@@ -53,12 +59,16 @@ var athena = (function() {
 
     $tooltip.appendChild($word);
     $tooltip.appendChild($mmdef);
+    document.body.appendChild($tooltip);
+    $tooltip.style.position = 'absolute';
+    $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 20) + 'px';
+    $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2)) + 'px';
   };
 
   return {
-    lookUp: function(word, selected) {
+    lookUp: function(word, selected, e) {
       var myanmar = inOrnagai(word, function(result) {
-        renderTooltip(word, result, selected);
+        renderTooltip(word, result, selected, e);
       });
     }
   };
@@ -68,10 +78,12 @@ var athena = (function() {
 document.addEventListener('dblclick', function(e) {
   var selected = window.getSelection();
   selectedText = selected.toString();
+  athena.lookUp(selectedText, selected.getRangeAt(0), e);
+});
 
-  // console.log(selected.getRangeAt(0));
-  // console.log(selected.getRangeAt(0).startContainer.parentNode);
-
-  athena.lookUp(selectedText, selected.getRangeAt(0));
-
+document.addEventListener('mousedown', function(e) {
+  var $tooltip = document.getElementById('athena-tooltip');
+  if($tooltip !== null) {
+    $tooltip.parentNode.removeChild($tooltip);
+  }
 });
