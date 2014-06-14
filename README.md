@@ -13,9 +13,10 @@ Please note that the accuracy, consistency and correctness of definitions are to
 
 Roadmap
 =======
-The followings are some of the features that I have in mind. Including, but not limited to.
-- Settling on an english dictionary API and providing english language definitions,
-- Inclusion of phonetics and pronunciation audio,
+The followings are some of the features that I have in mind. They include, but not limited to:
+- Settle on an english dictionary API and provide english language definitions,
+- Include phonetics and pronunciation audio,
+- Improve design
 - Option to choose between unicode/zawgyi or both.
 - Myanmar to English translation *(maybe)*
 
