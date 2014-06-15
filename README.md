@@ -7,9 +7,9 @@ Athena is a chrome extension to view definitons in both **Myanmar** and <del>**E
 Data Sources
 ===========
 Retrieval of definitions are from
-- [Ornagai](www.ornagai.com "Ornagai") [API](http://ornagai.pbworks.com/w/page/25703160/Ornagai%20API "Ornagai API") for Myanmar definitions.
+- [Ornagai](http://www.ornagai.com "Ornagai") [API](http://ornagai.pbworks.com/w/page/25703160/Ornagai%20API "Ornagai API") for Myanmar definitions.
 
-Please note that the accuracy, consistency and correctness of definitions are totally up to [Ornagai](www.ornagai.com "Ornagai").
+Please note that the accuracy, consistency and correctness of definitions are totally up to [Ornagai](http://www.ornagai.com "Ornagai").
 
 Roadmap
 =======
