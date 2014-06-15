@@ -20,5 +20,8 @@
       ]
     }
   ],
+  "web_accessible_resources": [
+    "fonts/fontello.woff"
+  ],
   "author": "Kaung Htet Zaw"
 }

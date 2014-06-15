@@ -43,6 +43,9 @@ var athena = (function() {
     var $word = document.createElement('div');
     $word.classList.add('word');
     $word.innerText = word;
+    var $icon = document.createElement('div');
+    $icon.classList.add('audio-icon');
+    $icon.innerHTML = '<i class="icon-volume-up"></i>';
     var $mmdef = document.createElement('div');
     $mmdef.classList.add('mmdef');
     if(result.length > 0) {
@@ -58,6 +61,7 @@ var athena = (function() {
     }
 
     $tooltip.appendChild($word);
+    $tooltip.appendChild($icon);
     $tooltip.appendChild($mmdef);
     document.body.appendChild($tooltip);
     $tooltip.style.position = 'absolute';
