@@ -39,7 +39,6 @@
 #athena-tooltip .icon-volume-up:hover {
   color: #ddd;
 }
-
 #athena-tooltip::after {
   content: "";
   position: absolute;
@@ -52,7 +51,6 @@
   left: 50%;
   margin-left: -25px;
 }
-
 #athena-tooltip .word {
   font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
   font-size: 14px;
@@ -60,7 +58,6 @@
   font-weight: bold;
   display: inline-block;
 }
-
 #athena-tooltip .mmdef {
   font-size: 13px;
   line-height: 2em;
