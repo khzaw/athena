@@ -1,5 +1,6 @@
 var athena = (function() {
   var ORNAGAI = "http://www.ornagai.com/index.php/api/word/q/";
+  var $tooltip;
 
   var makeRequest = function(word, success, error) {
     var xhr = new XMLHttpRequest();
@@ -35,17 +36,19 @@ var athena = (function() {
   };
 
   var renderTooltip = function(word, result, selected, e) {
-    var $tooltip = document.getElementById('athena-tooltip') || 
+    $tooltip = document.getElementById('athena-tooltip') ||
                     document.createElement('div');
     $tooltip.innerHTML = '';
-
     $tooltip.id = 'athena-tooltip';
+
     var $word = document.createElement('div');
     $word.classList.add('word');
     $word.innerText = word;
+
     var $icon = document.createElement('div');
     $icon.classList.add('audio-icon');
     $icon.innerHTML = '<i class="icon-volume-up"></i>';
+
     var $mmdef = document.createElement('div');
     $mmdef.classList.add('mmdef');
     if(result.length > 0) {
@@ -63,10 +66,10 @@ var athena = (function() {
     $tooltip.appendChild($word);
     $tooltip.appendChild($icon);
     $tooltip.appendChild($mmdef);
-    document.body.appendChild($tooltip);
     $tooltip.style.position = 'absolute';
     $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 20) + 'px';
     $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2)) + 'px';
+    document.body.appendChild($tooltip);
   };
 
   return {
@@ -74,20 +77,36 @@ var athena = (function() {
       var myanmar = inOrnagai(word, function(result) {
         renderTooltip(word, result, selected, e);
       });
-    }
+    },
   };
 
 })();
 
+var on = false;
+
 document.addEventListener('dblclick', function(e) {
+  e.stopPropagation();
   var selected = window.getSelection();
   selectedText = selected.toString();
   athena.lookUp(selectedText, selected.getRangeAt(0), e);
+  on = true;
 });
 
-document.addEventListener('mousedown', function(e) {
-  var $tooltip = document.getElementById('athena-tooltip');
-  if($tooltip !== null) {
-    $tooltip.parentNode.removeChild($tooltip);
+document.body.addEventListener('click', function(e) {
+  // walk up the DOM tree to check whether
+  // you are clicking inside the tooltip
+  var tooltipPresent = false;
+  for(var element = e.target; element; element = element.parentNode) {
+    if(element.id === 'athena-tooltip') {
+      tooltipPresent = true;
+      break;
+    }
+  }
+
+  if(!tooltipPresent) {
+    var $tooltip = document.getElementById('athena-tooltip');
+    if($tooltip !== null) {
+      $tooltip.parentNode.removeChild($tooltip);
+    }
   }
 });
