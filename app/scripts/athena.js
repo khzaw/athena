@@ -1,12 +1,13 @@
+'use strict';
 var athena = (function() {
-  var ORNAGAI = "http://www.ornagai.com/index.php/api/word/q/";
+  var ORNAGAI = 'http://www.ornagai.com/index.php/api/word/q/';
   var $tooltip;
 
   var makeRequest = function(word, success, error) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', ORNAGAI + word);
-    xhr.addEventListener('load', function(e) {
-      if(xhr.status == 200) {
+    xhr.addEventListener('load', function() {
+      if(xhr.status === 200) {
         success(xhr.status, xhr.responseText);
       } else {
         if(error) {
@@ -22,18 +23,18 @@ var athena = (function() {
     makeRequest(word, function(status, response) {
       var words = JSON.parse(response);
       result = words.filter(function(value) {
-        return value.word.toLowerCase() == word.toLowerCase();
+        return value.word.toLowerCase() === word.toLowerCase();
       });
       callback(result);
-    }, function(status, xhr) {
+    }, function() {
       result = [];
       callback(result);
     });
   };
 
-  var inOxford = function(word) {
-    console.log("looking up " + word + " in Oxford");
-  };
+  // var inOxford = function(word) {
+    // console.log('looking up ' + word + ' in Oxford');
+  // };
 
   var renderTooltip = function(word, result, selected, e) {
     $tooltip = document.getElementById('athena-tooltip') ||
@@ -74,7 +75,7 @@ var athena = (function() {
 
   return {
     lookUp: function(word, selected, e) {
-      var myanmar = inOrnagai(word, function(result) {
+      inOrnagai(word, function(result) {
         renderTooltip(word, result, selected, e);
       });
     },
@@ -87,7 +88,7 @@ var on = false;
 document.addEventListener('dblclick', function(e) {
   e.stopPropagation();
   var selected = window.getSelection();
-  selectedText = selected.toString();
+  var selectedText = selected.toString();
   athena.lookUp(selectedText, selected.getRangeAt(0), e);
   on = true;
 });

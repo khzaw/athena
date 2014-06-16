@@ -22,6 +22,15 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-athena.*
+app/athena.*
 # test page
-tooltip.html
+app/tooltip.html
+
+node_modules
+temp
+.tmp
+dist
+.sass-cache
+app/bower_components
+test/bower_components
+package

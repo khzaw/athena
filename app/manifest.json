@@ -2,26 +2,32 @@
   "manifest_version": 2,
   "name": "Athena",
   "description": "A dictionary lookup extension for both Myanmar and English languages",
-  "version": "0.1",
+  "version": "0.0.1",
   "permissions": [
     "http://www.ornagai.com/"
   ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "all_frames": true,
+      "all_frames": false,
       "js": [
-        "js/athena.js"
+        "scripts/athena.js"
       ],
       "css": [
-        "css/style.css"
-      ]
+        "styles/style.css"
+      ],
+      "run_at": "document_end"
     }
   ],
   "web_accessible_resources": [
-    "fonts/fontello.woff"
+    "font/fontello.woff"
   ],
   "author": "Kaung Htet Zaw"
 }
