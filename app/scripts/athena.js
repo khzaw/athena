@@ -69,8 +69,8 @@ var athena = (function() {
     $tooltip.appendChild($mmdef);
     $tooltip.style.position = 'absolute';
     document.body.appendChild($tooltip);
-    $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 20) + 'px';
-    $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2)) + 'px';
+    $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 27) + 'px';
+    $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2) + 12.5) + 'px';
     $tooltip.style.visibility = 'visible';
     $tooltip.style.opacity = 1;
   };
