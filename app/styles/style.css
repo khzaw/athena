@@ -12,7 +12,10 @@
   color: white;
   padding: 15px;
   border-radius: 4px;
+  visibility: hidden;
+  opacity: 0;
   word-wrap: break-word;
+  transition: visibility 0.5s ease, opacity 0.5s ease;
 }
 #athena-tooltip .audio-icon {
   display: inline-block;

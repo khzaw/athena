@@ -1,33 +1,40 @@
 {
-  "manifest_version": 2,
-  "name": "Athena",
-  "description": "A dictionary lookup extension for both Myanmar and English languages",
-  "version": "0.0.1",
-  "permissions": [
-    "http://www.ornagai.com/"
-  ],
-  "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
-  },
-  "default_locale": "en",
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "all_frames": false,
-      "js": [
-        "scripts/athena.js"
-      ],
-      "css": [
-        "styles/style.css"
-      ],
-      "run_at": "document_end"
-    }
-  ],
-  "web_accessible_resources": [
-    "font/fontello.woff"
-  ],
-  "author": "Kaung Htet Zaw"
+    "manifest_version": 2,
+    "name": "Athena",
+    "description": "A dictionary lookup extension for both Myanmar and English languages",
+    "version": "0.0.2",
+    "permissions": [
+        "http://www.ornagai.com/"
+    ],
+    "icons": {
+        "16": "images/icon-16.png",
+        "128": "images/icon-128.png"
+    },
+    "default_locale": "en",
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "all_frames": false,
+            "js": [
+                "scripts/athena.js"
+            ],
+            "css": [
+                "styles/style.css"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+      "scripts": [
+        "scripts/chromereload.js",
+        "scripts/background.js"
+      ]
+    },
+    "web_accessible_resources": [
+        "font/fontello.woff"
+    ],
+    "author": "Kaung Htet Zaw",
+    "options_page": "options.html"
 }

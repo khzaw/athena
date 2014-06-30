@@ -2,11 +2,8 @@
 
 module.exports = function(grunt) {
 
-  // Load grunt tasks automatically
-  require('load-grunt-tasks')(grunt);
-
-  // Time how long tasks take.
-  require('time-grunt')(grunt);
+  require('load-grunt-tasks')(grunt);     // Load grunt tasks automatically
+  require('time-grunt')(grunt);           // Time how long tasks take.
 
   var config = {
     app: 'app',
@@ -15,10 +12,7 @@ module.exports = function(grunt) {
   };
 
   grunt.initConfig({
-    // Project Settings
-    config: config,
-
-    // Watches files for changes and runs tasks based on changed files
+    config: config,                       // Project settings
     watch: {
       bower: {
         files: ['bower.json'],
@@ -54,8 +48,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // Grunt server and debug server setting
-    connect:  {
+    connect: {
       options: {
         port: 9000,
         livereload: 35729,
@@ -80,22 +73,19 @@ module.exports = function(grunt) {
       }
     },
 
-    // Empties folders to start fresh
     clean: {
-      chrome: {
-      },
+      chrome: {},
       dist: {
-        files: [{
+        file: [{
           dot: true,
           src: [
-            '<%= config.dist %>/*',
+            '<%= config.app %>/*',
             '!<%= config.dist %>/.git'
           ]
         }]
       }
     },
 
-    // Make sure code styles are up to par and there are not obvious mistakes
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -108,7 +98,7 @@ module.exports = function(grunt) {
         'test/spec/{,*/}*.js'
       ]
     },
-
+    
     mocha: {
       all: {
         options: {
@@ -118,7 +108,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // automatically inject bower components into the HTML file
     bowerInstall: {
       app: {
         src: [
@@ -127,9 +116,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
-    // additoinal tasks can operate on them
     useminPrepare: {
       options: {
         dest: '<%= config.dist %>'
@@ -140,16 +126,14 @@ module.exports = function(grunt) {
       ]
     },
 
-    // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
       options: {
         assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
       },
-      html: ['<%= config.dist %>/{,*/}*.html'],
+      html: ['<%= config.dist %>{,*/}*.html'],
       css: ['<%= config.dist %>/styles/{,*/}*.css']
     },
 
-    // the following *-min tasks produce minifies files in the dist folder
     imagemin: {
       dist: {
         files: [{
@@ -160,6 +144,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+
     svgmin: {
       dist: {
         files: [{
@@ -174,14 +159,14 @@ module.exports = function(grunt) {
     htmlmin: {
       dist: {
         options: {
-          // removeCommentsFromCDATA: true,
-          // collapseWhitespace: true,
-          // collapseBooleanAttributes: true,
-          // removeAttributeQuotes: true,
-          // removeRedundantAttributes: true,
-          // useShortDoctype: true,
-          // removeEmptyAttributes: true,
-          // removeOptionalTags: true
+            // removeCommentsFromCDATA: true,
+            // collapseWhitespace: true,
+            // collapseBooleanAttributes: true,
+            // removeAttributeQuotes: true,
+            // removeRedundantAttributes: true,
+            // useShortDoctype: true,
+            // removeEmptyAttributes: true,
+            // removeOptionalTags: true
         },
         files: [{
           expand: true,
@@ -192,32 +177,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish to
-    // use the Usemin blocks.
-    // cssmin: {
-      // dist: {
-        // files: {
-          // '<%= config.dist %>/styles/main.css': [
-            // '<%= config.app %>/styles/{,*/}*.css'
-          // ]
-        // }
-      // }
-    // },
-    // uglify: {
-      // dist: {
-        // files: {
-          // '<%= config.dist %>/scripts/scripts.js': [
-            // '<%= config.dist %>/scripts/scripts.js'
-          // ]
-        // }
-      // }
-    // },
-    // concat: {
-      // dist: {}
-    // },
-
-    // Copies remaining files to places other tasks can use
     copy: {
       dist: {
         files: [{
@@ -227,7 +186,7 @@ module.exports = function(grunt) {
           dest: '<%= config.dist %>',
           src: [
             '*.{ico,png,txt}',
-            'imeages/{,*/}*.{webp,gif}',
+            'images/{,*/}*.{webp,gif}',
             '{,*/}*.html',
             'styles/{,*/}*.css',
             'styles/fonts/{,*/}*.*',
@@ -249,7 +208,6 @@ module.exports = function(grunt) {
       ]
     },
 
-    // Auto buildnumber, exclude debug files. smart builds that event pages
     chromeManifest: {
       dist: {
         options: {
@@ -266,7 +224,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // Compress dist files to package
+    // Compres dist files to package
     compress: {
       dist: {
         options: {
@@ -291,10 +249,12 @@ module.exports = function(grunt) {
     ]);
   });
 
-  grunt.registerTask('test', [
-    'connect:test',
-    'mocha'
-  ]);
+  grunt.registerTask('test', function() {
+    grunt.task.run([
+      'connect:test',
+      'mocha'
+    ]);
+  });
 
   grunt.registerTask('build', [
     'clean:dist',
@@ -307,11 +267,5 @@ module.exports = function(grunt) {
     'copy',
     'usemin',
     'compress'
-  ]);
-
-  grunt.registerTask('default', [
-    'jshint',
-    'test',
-    'build'
   ]);
 };

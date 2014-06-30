@@ -67,11 +67,12 @@ var athena = (function() {
     $tooltip.appendChild($word);
     $tooltip.appendChild($icon);
     $tooltip.appendChild($mmdef);
-    console.log(e);
     $tooltip.style.position = 'absolute';
+    document.body.appendChild($tooltip);
     $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 20) + 'px';
     $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2)) + 'px';
-    document.body.appendChild($tooltip);
+    $tooltip.style.visibility = 'visible';
+    $tooltip.style.opacity = 1;
   };
 
   return {
@@ -92,6 +93,9 @@ document.addEventListener('dblclick', function(e) {
   var selectedText = selected.toString();
   athena.lookUp(selectedText, selected.getRangeAt(0), e);
   on = true;
+});
+
+window.addEventListener('resize', function() {
 });
 
 document.body.addEventListener('click', function(e) {
