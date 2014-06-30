@@ -13,6 +13,18 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     config: config,                       // Project settings
+    less: {
+      development: {
+        options: {
+          compress: true,
+          yuicompress: true,
+          optimization: 2
+        },
+        files: {
+          '<%= config.app %>/styles/style.css': '<%= config.app %>/styles/style.less'
+        }
+      }
+    },
     watch: {
       bower: {
         files: ['bower.json'],
@@ -29,8 +41,8 @@ module.exports = function(grunt) {
         files: ['Gruntfile.js']
       },
       styles: {
-        files: ['<%= config.app %>/styles/{,*/}*.css'],
-        tasks: [],
+        files: ['<%= config.app %>/styles/{,*/}*.less'],
+        tasks: ['less'],
         options: {
           livereload: true
         }
