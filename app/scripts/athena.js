@@ -60,13 +60,14 @@ var athena = (function() {
       }
     } else {
       var $span = document.createElement('span');
-      $span.innerText = 'Myanmar definition not found';
+      $span.innerText = 'No Myanmar definition';
       $mmdef.appendChild($span);
     }
 
     $tooltip.appendChild($word);
     $tooltip.appendChild($icon);
     $tooltip.appendChild($mmdef);
+    console.log(e);
     $tooltip.style.position = 'absolute';
     $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 20) + 'px';
     $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2)) + 'px';
