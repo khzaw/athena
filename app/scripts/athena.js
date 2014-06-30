@@ -69,7 +69,7 @@ var athena = (function() {
     $tooltip.appendChild($mmdef);
     $tooltip.style.position = 'absolute';
     document.body.appendChild($tooltip);
-    $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 27) + 'px';
+    $tooltip.style.top = (e.pageY - $tooltip.clientHeight - 20) + 'px';
     $tooltip.style.left = (e.pageX - ($tooltip.clientWidth/2)) + 'px';
     $tooltip.style.visibility = 'visible';
     $tooltip.style.opacity = 1;
@@ -96,6 +96,11 @@ document.addEventListener('dblclick', function(e) {
 });
 
 window.addEventListener('resize', function() {
+  var $tooltip = document.getElementById('athena-tooltip');
+  if($tooltip !== null) {
+    $tooltip.parentNode.removeChild($tooltip);
+    return false;
+  }
 });
 
 document.body.addEventListener('click', function(e) {
