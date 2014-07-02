@@ -90,9 +90,13 @@ var on = false;
 document.addEventListener('dblclick', function(e) {
   e.stopPropagation();
   var selected = window.getSelection();
-  var selectedText = selected.toString();
-  athena.lookUp(selectedText, selected.getRangeAt(0), e);
-  on = true;
+  if(!selected.isCollapsed) {
+    var selectedText = selected.toString();
+    if(selectedText.length && selectedText.match(/\w+/)) {
+      athena.lookUp(selectedText, selected.getRangeAt(0), e);
+      on = true;
+    }
+  }
 });
 
 window.addEventListener('resize', function() {
