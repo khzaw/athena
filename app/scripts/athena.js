@@ -1,7 +1,8 @@
 'use strict';
 var athena = (function() {
   var ORNAGAI = 'http://www.ornagai.com/index.php/api/word/q/';
-  var $tooltip;
+  var $tooltip,
+      currentWord;
 
   var makeRequest = function(word, success, error) {
     var xhr = new XMLHttpRequest();
@@ -60,7 +61,7 @@ var athena = (function() {
       }
     } else {
       var $span = document.createElement('span');
-      $span.innerText = 'No Myanmar definition';
+      $span.innerText = 'No definition found';
       $mmdef.appendChild($span);
     }
 
@@ -77,15 +78,21 @@ var athena = (function() {
 
   return {
     lookUp: function(word, selected, e) {
+      currentWord = word;
       inOrnagai(word, function(result) {
         renderTooltip(word, result, selected, e);
       });
     },
+    pronounce: function() {
+      if(currentWord) {
+        chrome.runtime.sendMessage({speak: currentWord});
+      } else {
+        return false;
+      }
+    }
   };
 
 })();
-
-var on = false;
 
 document.addEventListener('dblclick', function(e) {
   e.stopPropagation();
@@ -94,7 +101,6 @@ document.addEventListener('dblclick', function(e) {
     var selectedText = selected.toString();
     if(selectedText.length && selectedText.match(/\w+/)) {
       athena.lookUp(selectedText, selected.getRangeAt(0), e);
-      on = true;
     }
   }
 });
@@ -107,6 +113,7 @@ window.addEventListener('resize', function() {
   }
 });
 
+
 document.body.addEventListener('click', function(e) {
   // walk up the DOM tree to check whether
   // you are clicking inside the tooltip
@@ -118,10 +125,16 @@ document.body.addEventListener('click', function(e) {
     }
   }
 
+  var $tooltip = document.getElementById('athena-tooltip');
   if(!tooltipPresent) {
-    var $tooltip = document.getElementById('athena-tooltip');
-    if($tooltip !== null) {
+    if($tooltip !== null && $tooltip !== undefined) {
       $tooltip.parentNode.removeChild($tooltip);
+      tooltipPresent = false;
     }
+  } else {
+    var $audioIcon = document.getElementsByClassName('audio-icon')[0];
+    $audioIcon.addEventListener('click', function() {
+      athena.pronounce();
+    });
   }
 });
